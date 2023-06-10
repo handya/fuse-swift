@@ -101,7 +101,7 @@ public class Fuse {
     ///   - pattern: The pattern to search for. This is created by calling `createPattern`
     ///   - aString: The string in which to search for the pattern
     /// - Returns: A tuple containing a `score` between `0.0` (exact match) and `1` (not a match), and `ranges` of the matched characters. If no match is found will return nil.
-    public func search(_ pattern: Pattern?, in aString: String) -> (score: Double, ranges: [CountableClosedRange<Int>])? {
+    public func search(_ pattern: Pattern?, in aString: String) -> (score: Double, ranges: [ClosedRange<Int>])? {
         guard let pattern = pattern else {
             return nil
         }
@@ -143,7 +143,7 @@ public class Fuse {
     ///   - pattern: The pattern to search for. This is created by calling `createPattern`
     ///   - aString: The string in which to search for the pattern
     /// - Returns: A tuple containing a `score` between `0.0` (exact match) and `1` (not a match), and `ranges` of the matched characters. If no match is found will return a tuple with score of 1 and empty array of ranges.
-    private func _search(_ pattern: Pattern, in aString: String) -> (score: Double, ranges: [CountableClosedRange<Int>]) {
+    private func _search(_ pattern: Pattern, in aString: String) -> (score: Double, ranges: [ClosedRange<Int>]) {
         
         var text = aString
         
@@ -315,7 +315,7 @@ extension Fuse {
     ///   - text: the text string to search for.
     ///   - aString: The string in which to search for the pattern
     /// - Returns: A tuple containing a `score` between `0.0` (exact match) and `1` (not a match), and `ranges` of the matched characters.
-    public func search(_ text: String, in aString: String) -> (score: Double, ranges: [CountableClosedRange<Int>])? {
+    public func search(_ text: String, in aString: String) -> (score: Double, ranges: [ClosedRange<Int>])? {
         return self.search(self.createPattern(from: text), in: aString)
     }
     
@@ -431,7 +431,7 @@ extension Fuse {
             var scores = [Double]()
             var totalScore = 0.0
             
-            var propertyResults = [(key: String, score: Double, ranges: [CountableClosedRange<Int>])]()
+            var propertyResults = [(key: String, score: Double, ranges: [ClosedRange<Int>])]()
 
             item.properties.forEach { property in
                 let value = property.name
@@ -522,7 +522,7 @@ extension Fuse {
                     var scores = [Double]()
                     var totalScore = 0.0
                     
-                    var propertyResults = [(key: String, score: Double, ranges: [CountableClosedRange<Int>])]()
+                    var propertyResults = [(key: String, score: Double, ranges: [ClosedRange<Int>])]()
 
                     item.properties.forEach { property in
 
